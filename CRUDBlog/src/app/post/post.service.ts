@@ -15,20 +15,20 @@ export class PostService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json',//Định dạng kiểu dữ liệu là json
     }),
   };
 
   constructor(private httpClient: HttpClient) {}
-  //get All Methods
+  //get All Methods lấy tất cả dữ liệu
   getAll(): Observable<any> {
-    return this.httpClient.get(this.apiURL + '/posts/').pipe(
-      catchError((error: HttpErrorResponse) => {
+    return this.httpClient.get(this.apiURL + '/posts/').pipe(// Gửi yêu cầu GET đến API
+      catchError((error: HttpErrorResponse) => {// Bắt lỗi nếu có 
         return throwError(error);
       })
     );
   }
-  // create
+  // create tạo một bài viết
   create(post: Post): Observable<any> {
     return this.httpClient
       .post(this.apiURL + '/posts/', JSON.stringify(post), this.httpOptions)
@@ -38,9 +38,9 @@ export class PostService {
         })
       );
   }
-  //find data
+  //find data một bài viết cụ thể qua id 
   find(id: number): Observable<any> {
-    return this.httpClient.get(this.apiURL + '/posts/' + id).pipe(
+    return this.httpClient.get(this.apiURL + '/posts/' + id).pipe(   // Gửi yêu cầu GET đến API với id cụ thể.
       catchError((error: HttpErrorResponse) => {
         return throwError(error);
       })
@@ -49,7 +49,7 @@ export class PostService {
   //update
   update(id: number, post: Post): Observable<any> {
     return this.httpClient
-      .put(this.apiURL + '/posts/' + id, JSON.stringify(post), this.httpOptions)
+      .put(this.apiURL + '/posts/' + id, JSON.stringify(post), this.httpOptions)//Gửi yêu cầu PUT với dữ liệu bài viết.
       .pipe(
         catchError((error: HttpErrorResponse) => {
           return throwError(error);

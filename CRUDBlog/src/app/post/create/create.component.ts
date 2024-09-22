@@ -33,5 +33,5 @@ export class CreateComponent {
       alert("Post Create Successfull !");
       this.router.navigateByUrl('post/index');
     })
-  }
+  }     
 }

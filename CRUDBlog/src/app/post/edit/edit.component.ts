@@ -27,22 +27,23 @@ export class EditComponent {
     private router: Router,
     private route: ActivatedRoute
   ) {}
-
+// Gọi phương thức find từ PostService để lấy thông tin bài viết.
   ngOnInit(): void {
     this.id = this.route.snapshot.params['postId'];
     this.postService.find(this.id).subscribe((data: Post) => {
       this.post = data;
     });
 
-    this.form = new FormGroup({
+    this.form = new FormGroup({ // Khởi tạo FormGroup với các điều khiển.
       title: new FormControl('', [Validators.required]),
       body: new FormControl('', Validators.required),
     });
   }
 
-  get f() {
+  get f() { // Phương thức để lấy giá trị từ form.
     return this.form.controls;
   }
+  // Phương thức xử lý giá trị từ form và gửi lên server để cập nhật bài viết.
   submit() {
     console.log(this.form.value);
     this.postService.update(this.id, this.form.value).subscribe((res: any) => {
